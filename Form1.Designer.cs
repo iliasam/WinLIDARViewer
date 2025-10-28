@@ -129,7 +129,7 @@
             // lblScanPeriod
             // 
             this.lblScanPeriod.AutoSize = true;
-            this.lblScanPeriod.Location = new System.Drawing.Point(668, 21);
+            this.lblScanPeriod.Location = new System.Drawing.Point(735, 166);
             this.lblScanPeriod.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblScanPeriod.Name = "lblScanPeriod";
             this.lblScanPeriod.Size = new System.Drawing.Size(91, 13);
@@ -139,7 +139,7 @@
             // lblScanFreq
             // 
             this.lblScanFreq.AutoSize = true;
-            this.lblScanFreq.Location = new System.Drawing.Point(668, 41);
+            this.lblScanFreq.Location = new System.Drawing.Point(735, 189);
             this.lblScanFreq.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblScanFreq.Name = "lblScanFreq";
             this.lblScanFreq.Size = new System.Drawing.Size(82, 13);
@@ -204,7 +204,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.lblDistValue);
             this.groupBox2.Controls.Add(this.lblRawValue);
-            this.groupBox2.Location = new System.Drawing.Point(728, 158);
+            this.groupBox2.Location = new System.Drawing.Point(728, 224);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -388,7 +388,7 @@
             // 
             this.lblWrongPointsCnt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWrongPointsCnt.AutoSize = true;
-            this.lblWrongPointsCnt.Location = new System.Drawing.Point(778, 131);
+            this.lblWrongPointsCnt.Location = new System.Drawing.Point(736, 135);
             this.lblWrongPointsCnt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWrongPointsCnt.Name = "lblWrongPointsCnt";
             this.lblWrongPointsCnt.Size = new System.Drawing.Size(97, 13);

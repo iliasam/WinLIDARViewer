@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using static LidarScanningTest1.LdsCommClass;
+using static LidarScanningTest1.CamsenseX1ParserClass;
 
 namespace LidarScanningTest1
 {
+
+    public struct MeasuredPointT
+    {
+        public int DistanceMM;
+        public UInt16 Intensity;
+        public float AngleDeg;
+    }
+
     public struct RadarPoint
     {
         public double x;
@@ -21,6 +29,7 @@ namespace LidarScanningTest1
     public struct LidarItems
     {
         public string TextName;
+        public LDS_ParserInterface Parser;
     }
 
     public partial class Form1 : Form
@@ -45,7 +54,10 @@ namespace LidarScanningTest1
         DataAnalyseClass DataAnalyseObj = new DataAnalyseClass();
         HistogramForm HistogramFormObj;
 
-        LdsCommClass LdsCommObj = new LdsCommClass();
+        //LDS_ParserInterface LdsCamsenseX1ParserObj = new CamsenseX1ParserClass();
+        //LDS_ParserInterface LDS01RR_dev_ParserObj = new LDS01RR_dev_ParserClass();
+
+        LDS_ParserInterface LdsParserObj;
 
         /// <summary>
         /// Used for storing settings
@@ -81,6 +93,8 @@ namespace LidarScanningTest1
             InitializeComponent();
 
             InitLidarList();
+            LdsParserObj = SupportedLidars[0].Parser;
+            LdsParserObj.SetFrameReceivedCallback(ParseLdsFrame);
 
             cmbPortList.Items.Clear();
 
@@ -88,7 +102,7 @@ namespace LidarScanningTest1
             SerialWorker.DataReceivedCallback = SerialPortReceivedHandler;
             SerialWorker.SerialFailSignal = SerialFailSignal_function;
 
-            LdsCommObj.FrameReceived += ParseLdsFrame;
+            
 
             string settingsFilePath = Application.StartupPath + @"\config.ini";
             SettingsHolder = new IniParser(settingsFilePath);
@@ -131,7 +145,7 @@ namespace LidarScanningTest1
         // Callback from "Serial Worker"
         private void SerialPortReceivedHandler(byte[] receivedData)
         {
-            LdsCommObj.ParseData(receivedData);
+            LdsParserObj.ParseData(receivedData);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -297,6 +311,9 @@ namespace LidarScanningTest1
                 return;
             }
 
+            //Opening port
+            LdsParserObj = SupportedLidars[cmbLidarList.SelectedIndex].Parser;
+            LdsParserObj.SetFrameReceivedCallback(ParseLdsFrame);
 
             int baudrate = Convert.ToInt32(txtBaudrate.Text);
             // Try to open selected COM port
@@ -333,10 +350,12 @@ namespace LidarScanningTest1
 
             LidarItems tmpLidarItem1;
             tmpLidarItem1.TextName = "Camsense-X1";
+            tmpLidarItem1.Parser = new CamsenseX1ParserClass();
             SupportedLidars.Add(tmpLidarItem1);
 
             LidarItems tmpLidarItem2;
             tmpLidarItem2.TextName = "LDS01RR dev. board";
+            tmpLidarItem2.Parser = new LDS01RR_dev_ParserClass();
             SupportedLidars.Add(tmpLidarItem2);
 
             foreach (var item in SupportedLidars)
