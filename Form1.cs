@@ -18,9 +18,13 @@ namespace LidarScanningTest1
         public bool NotVisible;
     }
 
+    public struct LidarItems
+    {
+        public string TextName;
+    }
+
     public partial class Form1 : Form
     {
-        const int UART_BAUD = 115200;
         const int RADAR_ROTATION_DEG = 180;
 
         struct ScanPoint
@@ -43,7 +47,12 @@ namespace LidarScanningTest1
 
         LdsCommClass LdsCommObj = new LdsCommClass();
 
-        public IniParser SettingsHolder;//Used for storing settings
+        /// <summary>
+        /// Used for storing settings
+        /// </summary>
+        public IniParser SettingsHolder;
+
+        private List<LidarItems> SupportedLidars = new List<LidarItems>();
 
         /// <summary>
         /// Rotation period in ms
@@ -71,13 +80,15 @@ namespace LidarScanningTest1
         {
             InitializeComponent();
 
+            InitLidarList();
+
             cmbPortList.Items.Clear();
 
             SerialWorker = new SerialWorkerClass(Application.StartupPath + @"\config.ini");
             SerialWorker.DataReceivedCallback = SerialPortReceivedHandler;
             SerialWorker.SerialFailSignal = SerialFailSignal_function;
 
-            LdsCommObj.PacketReceived += ParseLdsFrame;
+            LdsCommObj.FrameReceived += ParseLdsFrame;
 
             string settingsFilePath = Application.StartupPath + @"\config.ini";
             SettingsHolder = new IniParser(settingsFilePath);
@@ -88,6 +99,12 @@ namespace LidarScanningTest1
                 cmbPortList.Items.Add(serialName);
                 cmbPortList.SelectedItem = cmbPortList.Items[0];
             }
+
+            string serialBaudrate = SettingsHolder.GetSetting("SERIAL_SETTINGS", "baud");
+            if (serialBaudrate == "")
+                txtBaudrate.Text = "115200";
+            else
+                txtBaudrate.Text = serialBaudrate;
 
             //Load calibration coefficients
             string angCorrStr = SettingsHolder.GetSetting("LIDAR_SETTINGS", "angular_corr");
@@ -135,11 +152,9 @@ namespace LidarScanningTest1
 
             int pointsCnt = points.Count;
             CurentPointsCnt = pointsCnt;
-            double angResolution = 360.0 / pointsCnt;
 
             for (int i = 0; i < pointsCnt; i++)
             {
-                //ScanPoints[i].RealAngleDeg = 360 - i * angResolution;
                 ScanPoints[i].RealAngleDeg = 360 - points[i].AngleDeg;
                 ScanPoints[i].RawValue = 0;
 
@@ -282,9 +297,11 @@ namespace LidarScanningTest1
                 return;
             }
 
+
+            int baudrate = Convert.ToInt32(txtBaudrate.Text);
             // Try to open selected COM port
             string port_name = SerialWorker.GetSerialName(cmbPortList.Text);
-            int result = SerialWorker.OpenSerialPort(port_name, UART_BAUD);
+            int result = SerialWorker.OpenSerialPort(port_name, baudrate);
             if (result == 1)
             {
                 btnOpenClose.Text = "Close";
@@ -306,8 +323,28 @@ namespace LidarScanningTest1
             }
             else
             {
-                cmbPortList.SelectedItem = cmbPortList.Items[0];//нашелся хотя бы один порт
+                cmbPortList.SelectedItem = cmbPortList.Items[0];//Found at least one port
             }
+        }
+
+        public void InitLidarList()
+        {
+            //Sequence is fixed!
+
+            LidarItems tmpLidarItem1;
+            tmpLidarItem1.TextName = "Camsense-X1";
+            SupportedLidars.Add(tmpLidarItem1);
+
+            LidarItems tmpLidarItem2;
+            tmpLidarItem2.TextName = "LDS01RR dev. board";
+            SupportedLidars.Add(tmpLidarItem2);
+
+            foreach (var item in SupportedLidars)
+            {
+                cmbLidarList.Items.Add(item.TextName);
+            }
+
+            cmbLidarList.SelectedIndex = 0;
         }
 
         // GUI *********************************************************
@@ -361,5 +398,7 @@ namespace LidarScanningTest1
         {
             OpenHistogramForm();
         }
+
+
     }
 }

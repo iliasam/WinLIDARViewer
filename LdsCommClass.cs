@@ -10,9 +10,9 @@ namespace LidarScanningTest1
 {
     class LdsCommClass
     {
-        public Action<List<MeasuredPointT>> PacketReceived;
+        public Action<List<MeasuredPointT>> FrameReceived;
 
-        enum SyncState
+        private enum SyncState
         {
             NoSync = 0,
             ReceivedByte1,
@@ -52,11 +52,10 @@ namespace LidarScanningTest1
             {
                 ParseReceivedByte(item);
             }
-           
         }
 
 
-        void ParseReceivedByte(byte rxByte)
+        private void ParseReceivedByte(byte rxByte)
         {
             if (currSync == SyncState.NoSync)
             {
@@ -95,14 +94,14 @@ namespace LidarScanningTest1
                 {
                     currSync = SyncState.NoSync;
 
-                    if (PacketPosCnt == 36)
+                    if (PacketPosCnt == PACKET_SIZE_BYTES)
                         ParseMeasurementDataPacket();
                 }
             }
         }//end of ParseReceivedByte()
 
 
-        void ParseMeasurementDataPacket()
+        private void ParseMeasurementDataPacket()
         {
             byte PacketSeq = CurrPacket[4];
             int speed = ((UInt16)CurrPacket[SPEED_LOW_BYTE_IDX] + (UInt16)CurrPacket[SPEED_LOW_BYTE_IDX + 1] * 256);
@@ -135,7 +134,7 @@ namespace LidarScanningTest1
                 {
                     if (pointsList.Count < 400)
                     {
-                        PacketReceived?.Invoke(pointsList);
+                        FrameReceived?.Invoke(pointsList);
                         //System.Diagnostics.Debug.WriteLine($"FRAME");
                     }
                     else
@@ -146,7 +145,7 @@ namespace LidarScanningTest1
             }
         }
 
-        MeasuredPointT ParseMeasuredData(byte byte1, byte byte2, byte byte3, float angleDeg)
+        private MeasuredPointT ParseMeasuredData(byte byte1, byte byte2, byte byte3, float angleDeg)
         {
             MeasuredPointT res;
 
@@ -159,5 +158,5 @@ namespace LidarScanningTest1
 
             return res;
         }
-    }
+    } //end of class
 }

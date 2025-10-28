@@ -20,7 +20,7 @@ namespace LidarScanningTest1
         public IniParser SettingsHolder;//Used to store settings
         public Action<byte[]> DataReceivedCallback;//callback
 		public Action<bool> SerialFailSignal;//callback
-        static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+        static System.Windows.Forms.Timer ReadoutTimer = new System.Windows.Forms.Timer();
 
 
         /// <summary>
@@ -32,8 +32,8 @@ namespace LidarScanningTest1
 		{
             SettingsHolder = new IniParser(ini_file_path);
 
-            myTimer.Tick += new EventHandler(TimerEventProcessor);
-            myTimer.Interval = 30;//50ms
+            ReadoutTimer.Tick += new EventHandler(TimerEventProcessor);
+            ReadoutTimer.Interval = 30;//50ms
         }
 
         private void TimerEventProcessor(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace LidarScanningTest1
 
                 if (Port.IsOpen)
                 {
-                    myTimer.Start();
+                    ReadoutTimer.Start();
 
                     SaveSerialSettings();
                 	ConnectionState = true;
@@ -91,7 +91,7 @@ namespace LidarScanningTest1
                 MessageBox.Show(ex.Message, "Error in open port", MessageBoxButtons.OK);// Show message about error
                 Port.Dispose();
                 ConnectionState = false;
-                myTimer.Stop();
+                ReadoutTimer.Stop();
                 return 0;
             } //end of try
 		}//end of function
@@ -174,7 +174,7 @@ namespace LidarScanningTest1
         {
         	if (Port != null)
         	{
-                myTimer.Stop();
+                ReadoutTimer.Stop();
                 Port.Close();
         	}
         	ConnectionState = false;

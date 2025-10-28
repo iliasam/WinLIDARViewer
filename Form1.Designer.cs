@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtBaudrate = new System.Windows.Forms.TextBox();
             this.cmbPortList = new System.Windows.Forms.ComboBox();
             this.btnOpenClose = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -55,6 +57,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblWrongPointsCnt = new System.Windows.Forms.Label();
             this.radarPlotComponent1 = new LidarScanningTest1.RadarPlotComponent();
+            this.cmbLidarList = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAngCorrection)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -66,16 +70,35 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtBaudrate);
             this.groupBox1.Controls.Add(this.cmbPortList);
             this.groupBox1.Controls.Add(this.btnOpenClose);
             this.groupBox1.Location = new System.Drawing.Point(7, 8);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(267, 50);
+            this.groupBox1.Size = new System.Drawing.Size(438, 50);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Serial Port";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(232, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Baudrate:";
+            // 
+            // txtBaudrate
+            // 
+            this.txtBaudrate.Location = new System.Drawing.Point(290, 18);
+            this.txtBaudrate.Name = "txtBaudrate";
+            this.txtBaudrate.Size = new System.Drawing.Size(64, 20);
+            this.txtBaudrate.TabIndex = 3;
+            this.txtBaudrate.Text = "115200";
             // 
             // cmbPortList
             // 
@@ -89,7 +112,7 @@
             // 
             // btnOpenClose
             // 
-            this.btnOpenClose.Location = new System.Drawing.Point(190, 14);
+            this.btnOpenClose.Location = new System.Drawing.Point(359, 13);
             this.btnOpenClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnOpenClose.Name = "btnOpenClose";
             this.btnOpenClose.Size = new System.Drawing.Size(71, 28);
@@ -106,7 +129,7 @@
             // lblScanPeriod
             // 
             this.lblScanPeriod.AutoSize = true;
-            this.lblScanPeriod.Location = new System.Drawing.Point(278, 10);
+            this.lblScanPeriod.Location = new System.Drawing.Point(668, 21);
             this.lblScanPeriod.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblScanPeriod.Name = "lblScanPeriod";
             this.lblScanPeriod.Size = new System.Drawing.Size(91, 13);
@@ -116,7 +139,7 @@
             // lblScanFreq
             // 
             this.lblScanFreq.AutoSize = true;
-            this.lblScanFreq.Location = new System.Drawing.Point(277, 34);
+            this.lblScanFreq.Location = new System.Drawing.Point(668, 41);
             this.lblScanFreq.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblScanFreq.Name = "lblScanFreq";
             this.lblScanFreq.Size = new System.Drawing.Size(82, 13);
@@ -127,7 +150,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(546, 10);
+            this.label3.Location = new System.Drawing.Point(762, 67);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
@@ -143,7 +166,7 @@
             0,
             0,
             65536});
-            this.numAngCorrection.Location = new System.Drawing.Point(614, 8);
+            this.numAngCorrection.Location = new System.Drawing.Point(830, 65);
             this.numAngCorrection.Margin = new System.Windows.Forms.Padding(2);
             this.numAngCorrection.Maximum = new decimal(new int[] {
             30,
@@ -162,10 +185,10 @@
             // btnSaveCoeff
             // 
             this.btnSaveCoeff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveCoeff.Location = new System.Drawing.Point(672, 8);
+            this.btnSaveCoeff.Location = new System.Drawing.Point(805, 89);
             this.btnSaveCoeff.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveCoeff.Name = "btnSaveCoeff";
-            this.btnSaveCoeff.Size = new System.Drawing.Size(51, 43);
+            this.btnSaveCoeff.Size = new System.Drawing.Size(77, 26);
             this.btnSaveCoeff.TabIndex = 11;
             this.btnSaveCoeff.Text = "Save Coeff.";
             this.btnSaveCoeff.UseVisualStyleBackColor = true;
@@ -181,7 +204,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.lblDistValue);
             this.groupBox2.Controls.Add(this.lblRawValue);
-            this.groupBox2.Location = new System.Drawing.Point(731, 39);
+            this.groupBox2.Location = new System.Drawing.Point(728, 158);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -282,7 +305,7 @@
             // numStartAngle
             // 
             this.numStartAngle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numStartAngle.Location = new System.Drawing.Point(486, 34);
+            this.numStartAngle.Location = new System.Drawing.Point(831, 10);
             this.numStartAngle.Margin = new System.Windows.Forms.Padding(2);
             this.numStartAngle.Maximum = new decimal(new int[] {
             360,
@@ -298,7 +321,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(423, 37);
+            this.label1.Location = new System.Drawing.Point(768, 13);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
@@ -308,7 +331,7 @@
             // numStopAngle
             // 
             this.numStopAngle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numStopAngle.Location = new System.Drawing.Point(613, 34);
+            this.numStopAngle.Location = new System.Drawing.Point(830, 38);
             this.numStopAngle.Margin = new System.Windows.Forms.Padding(2);
             this.numStopAngle.Maximum = new decimal(new int[] {
             359,
@@ -329,7 +352,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(550, 37);
+            this.label2.Location = new System.Drawing.Point(767, 41);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
@@ -365,7 +388,7 @@
             // 
             this.lblWrongPointsCnt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWrongPointsCnt.AutoSize = true;
-            this.lblWrongPointsCnt.Location = new System.Drawing.Point(730, 11);
+            this.lblWrongPointsCnt.Location = new System.Drawing.Point(778, 131);
             this.lblWrongPointsCnt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWrongPointsCnt.Name = "lblWrongPointsCnt";
             this.lblWrongPointsCnt.Size = new System.Drawing.Size(97, 13);
@@ -384,11 +407,31 @@
             this.radarPlotComponent1.Size = new System.Drawing.Size(715, 449);
             this.radarPlotComponent1.TabIndex = 4;
             // 
+            // cmbLidarList
+            // 
+            this.cmbLidarList.FormattingEnabled = true;
+            this.cmbLidarList.Location = new System.Drawing.Point(464, 33);
+            this.cmbLidarList.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbLidarList.Name = "cmbLidarList";
+            this.cmbLidarList.Size = new System.Drawing.Size(176, 21);
+            this.cmbLidarList.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(465, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Lidar Type:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 538);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cmbLidarList);
             this.Controls.Add(this.lblWrongPointsCnt);
             this.Controls.Add(this.numStopAngle);
             this.Controls.Add(this.label2);
@@ -405,8 +448,9 @@
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "LDS Scanning Test v1.0";
+            this.Text = "WinLIDARViewer v1.0";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAngCorrection)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -448,6 +492,10 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Label lblWrongPointsCnt;
         private System.Windows.Forms.Button btnOpenHistogram;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtBaudrate;
+        private System.Windows.Forms.ComboBox cmbLidarList;
+        private System.Windows.Forms.Label label6;
     }
 }
 
