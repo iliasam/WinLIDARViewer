@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="ini_parser.cs" />
     <Compile Include="LDS01RR_dev_ParserClass.cs" />
+    <Compile Include="LDS01RR_ParserClass.cs" />
     <Compile Include="LDS_ParserInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

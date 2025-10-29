@@ -56,9 +56,9 @@
             this.lblTotalPoints = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblWrongPointsCnt = new System.Windows.Forms.Label();
-            this.radarPlotComponent1 = new LidarScanningTest1.RadarPlotComponent();
             this.cmbLidarList = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.radarPlotComponent1 = new LidarScanningTest1.RadarPlotComponent();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAngCorrection)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -128,6 +128,7 @@
             // 
             // lblScanPeriod
             // 
+            this.lblScanPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblScanPeriod.AutoSize = true;
             this.lblScanPeriod.Location = new System.Drawing.Point(735, 166);
             this.lblScanPeriod.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -138,6 +139,7 @@
             // 
             // lblScanFreq
             // 
+            this.lblScanFreq.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblScanFreq.AutoSize = true;
             this.lblScanFreq.Location = new System.Drawing.Point(735, 189);
             this.lblScanFreq.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -395,18 +397,6 @@
             this.lblWrongPointsCnt.TabIndex = 19;
             this.lblWrongPointsCnt.Text = "Wrong Points: N/A";
             // 
-            // radarPlotComponent1
-            // 
-            this.radarPlotComponent1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.radarPlotComponent1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.radarPlotComponent1.Location = new System.Drawing.Point(8, 63);
-            this.radarPlotComponent1.Margin = new System.Windows.Forms.Padding(2);
-            this.radarPlotComponent1.Name = "radarPlotComponent1";
-            this.radarPlotComponent1.Size = new System.Drawing.Size(715, 449);
-            this.radarPlotComponent1.TabIndex = 4;
-            // 
             // cmbLidarList
             // 
             this.cmbLidarList.FormattingEnabled = true;
@@ -424,6 +414,18 @@
             this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 5;
             this.label6.Text = "Lidar Type:";
+            // 
+            // radarPlotComponent1
+            // 
+            this.radarPlotComponent1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.radarPlotComponent1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.radarPlotComponent1.Location = new System.Drawing.Point(8, 63);
+            this.radarPlotComponent1.Margin = new System.Windows.Forms.Padding(2);
+            this.radarPlotComponent1.Name = "radarPlotComponent1";
+            this.radarPlotComponent1.Size = new System.Drawing.Size(715, 449);
+            this.radarPlotComponent1.TabIndex = 4;
             // 
             // Form1
             // 
@@ -449,6 +451,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "WinLIDARViewer v1.0";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAngCorrection)).EndInit();

@@ -1,10 +1,16 @@
-# LDS Scanning Test
-Windows (C#) utility for testing LDS01RR lidar.  
+# WinLIDARViewer
+Windows (C#) utility for testing some LIDARs.  
+  
+Supported models:
+ * camsense-X1, see https://github.com/Vidicon/camsense-X1
+ * LDS01RR dev board (Cullinan)  
+ * Direct LDS01RR, see protocol here: https://github.com/Roborock-OpenSource/Cullinan  
+  
 Features:  
- * Draw "radar" plot with selectable zoom  
- * Display distance value at given direction  
- * Analyse noise information for given direction, including drawing histogram  
- ![](https://github.com/iliasam/LDS01RR_lidar/blob/main/Pictures/PCUtility.png)
+ * Draw a "radar" plot with selectable zoom  
+ * Display the distance value for a given direction  
+ * Analyze noise information for a given direction, including drawing a histogram  
+ ![](https://github.com/iliasam/WinLIDARViewer/blob/main/Pictures/Screen1.png)
 
 
 

@@ -94,15 +94,13 @@ namespace LidarScanningTest1
 
             InitLidarList();
             LdsParserObj = SupportedLidars[0].Parser;
-            LdsParserObj.SetFrameReceivedCallback(ParseLdsFrame);
+            LdsParserObj.SetFrameReceivedCallback(ProcessLdsFrame);
 
             cmbPortList.Items.Clear();
 
             SerialWorker = new SerialWorkerClass(Application.StartupPath + @"\config.ini");
             SerialWorker.DataReceivedCallback = SerialPortReceivedHandler;
             SerialWorker.SerialFailSignal = SerialFailSignal_function;
-
-            
 
             string settingsFilePath = Application.StartupPath + @"\config.ini";
             SettingsHolder = new IniParser(settingsFilePath);
@@ -119,6 +117,16 @@ namespace LidarScanningTest1
                 txtBaudrate.Text = "115200";
             else
                 txtBaudrate.Text = serialBaudrate;
+
+            //Load saved lidar type
+            string lidarType = SettingsHolder.GetSetting("LIDAR_SETTINGS", "TypeIdx");
+            if (!String.IsNullOrEmpty(lidarType))
+            {
+                int lidarTypeIdx = Convert.ToInt32(lidarType);
+                if (lidarTypeIdx < SupportedLidars.Count)
+                    cmbLidarList.SelectedIndex = lidarTypeIdx;
+            }
+
 
             //Load calibration coefficients
             string angCorrStr = SettingsHolder.GetSetting("LIDAR_SETTINGS", "angular_corr");
@@ -156,7 +164,7 @@ namespace LidarScanningTest1
         }
 
         // Main processing of the frame
-        void ParseLdsFrame(List<MeasuredPointT> points)
+        void ProcessLdsFrame(List<MeasuredPointT> points)
         {
             RXFrameCnt++;
             Invoke((MethodInvoker)delegate ()
@@ -313,7 +321,7 @@ namespace LidarScanningTest1
 
             //Opening port
             LdsParserObj = SupportedLidars[cmbLidarList.SelectedIndex].Parser;
-            LdsParserObj.SetFrameReceivedCallback(ParseLdsFrame);
+            LdsParserObj.SetFrameReceivedCallback(ProcessLdsFrame);
 
             int baudrate = Convert.ToInt32(txtBaudrate.Text);
             // Try to open selected COM port
@@ -357,6 +365,11 @@ namespace LidarScanningTest1
             tmpLidarItem2.TextName = "LDS01RR dev. board";
             tmpLidarItem2.Parser = new LDS01RR_dev_ParserClass();
             SupportedLidars.Add(tmpLidarItem2);
+
+            LidarItems tmpLidarItem3;
+            tmpLidarItem3.TextName = "LDS01RR";
+            tmpLidarItem3.Parser = new LDS01RR_ParserClass();
+            SupportedLidars.Add(tmpLidarItem3);
 
             foreach (var item in SupportedLidars)
             {
@@ -418,6 +431,11 @@ namespace LidarScanningTest1
             OpenHistogramForm();
         }
 
-
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string lidarTypeStr = cmbLidarList.SelectedIndex.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            SettingsHolder.AddSetting("LIDAR_SETTINGS", "TypeIdx", lidarTypeStr);
+            SettingsHolder.SaveSettings();
+        }
     }
 }
