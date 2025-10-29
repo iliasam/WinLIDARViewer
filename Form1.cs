@@ -315,6 +315,7 @@ namespace LidarScanningTest1
                 SerialWorker.ClosePort();
 
                 btnOpenClose.Text = "Open";
+                cmbLidarList.Enabled = true;
                 // Exit
                 return;
             }
@@ -330,6 +331,7 @@ namespace LidarScanningTest1
             if (result == 1)
             {
                 btnOpenClose.Text = "Close";
+                cmbLidarList.Enabled = false;
             }
         }
 
