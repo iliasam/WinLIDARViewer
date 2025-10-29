@@ -6,7 +6,7 @@ Supported models:
  * **LDS01RR dev board** (Cullinan): https://github.com/iliasam/LDS01RR_lidar    
  * **Direct LDS01RR**, see protocol here: https://github.com/Roborock-OpenSource/Cullinan  
  If I'm not mistaken, LDS01RR protocol is compatible with LDS02RR, wich is compatible with Neato XV11 protocol.  
- So **LDS02RR** and **Neato XV11** should be compatible too.
+ So **LDS02RR** and **Neato XV11** should be supported too.
   
 Features:  
  * Draw a "radar" plot with selectable zoom  
